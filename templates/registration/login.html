@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if page == 'register' %}
+    | Register
+    {% else %}
+    | Login
+    {% endif %}
+{% endblock title %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container my-5 mb-5">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-4 border border-danger p-3">
+            {% if page == 'register' %}
+            <h3 class="text-center">Register</h3>
+            {% else %}
+            <h3 class="text-center">Login</h3>
+            {% endif %}
+            <hr class="border-danger">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form|crispy}}
+                <hr class="border-danger">
+                <div class="row justify-content-center mt-5">
+                    <input type="submit" value="Login" class="btn btn-outline-success">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
