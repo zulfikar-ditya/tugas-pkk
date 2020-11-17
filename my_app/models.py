@@ -11,9 +11,6 @@ class Tarif(models.Model):
         verbose_name = "Tarif"
         verbose_name_plural = "Tarifs"
 
-    def __str__(self):
-        return self.name
-
     def get_absolute_url(self):
         return reverse("Tarif_detail", kwargs={"pk": self.pk})
 
@@ -50,9 +47,6 @@ class Uses(models.Model):
         verbose_name = "Uses"
         verbose_name_plural = "Usess"
 
-    def __str__(self):
-        return self.name
-
     def get_absolute_url(self):
         return reverse("Uses_detail", kwargs={"pk": self.pk})
 
@@ -70,9 +64,6 @@ class Tagihan(models.Model):
         verbose_name = "Tagihan"
         verbose_name_plural = "Tagihans"
 
-    def __str__(self):
-        return self.name
-
     def get_absolute_url(self):
         return reverse("Tagihan_detail", kwargs={"pk": self.pk})
 
@@ -89,9 +80,6 @@ class PayMent(models.Model):
     class Meta:
         verbose_name = "PayMent"
         verbose_name_plural = "PayMents"
-
-    def __str__(self):
-        return self.name
 
     def get_absolute_url(self):
         return reverse("PayMent_detail", kwargs={"pk": self.pk})

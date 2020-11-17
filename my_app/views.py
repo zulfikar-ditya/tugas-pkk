@@ -6,7 +6,7 @@ from .forms import RegisterForm
 
 
 def index(request):
-    return render(request, 'base.html')
+    return render(request, 'home/index.html')
 
 
 def register(request):
@@ -22,3 +22,7 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request, 'registration/login.html', {'page': 'register', 'form': form})
+
+
+def dont_have_acces(request):
+    return render(request, 'home/dont-have-access.html')

@@ -1,0 +1,79 @@
+[
+{
+    "model": "my_app.months",
+    "pk": 1,
+    "fields": {
+        "name": "January"
+    }
+},
+{
+    "model": "my_app.months",
+    "pk": 2,
+    "fields": {
+        "name": "February"
+    }
+},
+{
+    "model": "my_app.months",
+    "pk": 3,
+    "fields": {
+        "name": "March"
+    }
+},
+{
+    "model": "my_app.months",
+    "pk": 4,
+    "fields": {
+        "name": "April"
+    }
+},
+{
+    "model": "my_app.months",
+    "pk": 5,
+    "fields": {
+        "name": "May"
+    }
+},
+{
+    "model": "my_app.months",
+    "pk": 6,
+    "fields": {
+        "name": "June"
+    }
+},
+{
+    "model": "my_app.months",
+    "pk": 7,
+    "fields": {
+        "name": "August"
+    }
+},
+{
+    "model": "my_app.months",
+    "pk": 8,
+    "fields": {
+        "name": "September"
+    }
+},
+{
+    "model": "my_app.months",
+    "pk": 9,
+    "fields": {
+        "name": "October"
+    }
+},
+{
+    "model": "my_app.months",
+    "pk": 10,
+    "fields": {
+        "name": "November"
+    }
+},
+{
+    "model": "my_app.months",
+    "pk": 11,
+    "fields": {
+        "name": "December"
+    }
+}
+]

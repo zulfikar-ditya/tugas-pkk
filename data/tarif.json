@@ -1,0 +1,26 @@
+[
+{
+    "model": "my_app.tarif",
+    "pk": 1,
+    "fields": {
+        "daya": 450,
+        "tarif": 5000
+    }
+},
+{
+    "model": "my_app.tarif",
+    "pk": 2,
+    "fields": {
+        "daya": 900,
+        "tarif": 5000
+    }
+},
+{
+    "model": "my_app.tarif",
+    "pk": 3,
+    "fields": {
+        "daya": 1300,
+        "tarif": 5000
+    }
+}
+]

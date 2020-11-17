@@ -21,21 +21,21 @@
             <div class="collapse navbar-collapse text-capitalize" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     {% if request.user.is_authenticated %}
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item dropdown">
+                    {% if request.user.is_staff or request.user.is_superuser %}
+                    <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
+                            Staff
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
+
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <span class="dropdown-item" href="" disable>Uses</span>
+                            <a class="dropdown-item" href="{% url 'staff:add_uses_id' %}">Add Power used</a>
+                            <a class="dropdown-item" href="{% url 'staff:powerUsedList' %}">List Power Used</a>
                         </div>
                     </li>
+                    {% endif %}
                     <li class="nav-item active">
                         <a class="nav-link" href="{% url 'logout' %}">Logout <i class="fas fa-sign-out-alt"></i></a>
                     </li>

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+| Staff - Power Used - List
+{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="table-responsive table-hover">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %} 
+        <table class="table text-capitalize">
+            <thead class="bg-danger text-white">
+                <th scope="col">#</th>
+                <th scope="col">Custommer</th>
+                <th scope="col">month</th>
+                <th scope="col">year</th>
+                <th scope="col">meter start</th>
+                <th scope="col">meter end</th>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <th scope="row">#</th>
+                    <td>{{ i.custommer }}</td>
+                    <td>{{ i.month }}</td>
+                    <td>{{ i.year }}</td>
+                    <td>{{ i.meter_start }}</td>
+                    <td>{{ i.meter_end }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}
