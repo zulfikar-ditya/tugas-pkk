@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.core.paginator import Paginator
 
 
 from my_app.views import dont_have_acces, notFound
@@ -76,8 +77,11 @@ def addUses(request, username):
 def powerUsedList(request):
     if request.user.is_staff or request.user.is_superuser:
         data = Uses.objects.all()
+        page = Paginator(data, 50)
+        pageNum = request.GET.get('page')
+        data_result = page.get_page(pageNum)
         return render(request, 'staff/power-used/list.html', {
-            'data': data,
+            'data': data_result,
         })
     else:
         return dont_have_acces(request)
@@ -127,7 +131,10 @@ def autoAddBill(request):
                 new.sum_meter = int(i.meter_end) - int(i.meter_start)
                 new.save()
         tagihan = Tagihan.objects.filter(status=False)
-        return render(request, 'staff/bill/list.html', {'tagihan': tagihan})
+        page = Paginator(tagihan, 50)
+        pageNum = request.GET.get('page')
+        data = page.get_page(pageNum)
+        return render(request, 'staff/bill/list.html', {'tagihan': data})
     else:
         return dont_have_acces(request)
 
@@ -151,6 +158,7 @@ def paymentConfirm(request, id):
             tagihan.status = True
             tagihan.save()
             new.save()
+            messages.success(request, 'Data Submited')
             return redirect('staff:paymentlist')
         return render(request, 'staff/payment/confirm.html', {
             'tagihan': tagihan,
@@ -165,7 +173,10 @@ def paymentConfirm(request, id):
 def paymentlist(request):
     if request.user.is_staff or request.user.is_superuser:
         data = PayMent.objects.all()
-        return render(request, 'staff/payment/list.html', {'data': data})
+        page = Paginator(data, 50)
+        pageNum = request.GET.get('page')
+        data_result = page.get_page(pageNum)
+        return render(request, 'staff/payment/list.html', {'data': data_result})
     else:
         return dont_have_acces(request)
         

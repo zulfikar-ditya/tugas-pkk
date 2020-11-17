@@ -56,3 +56,14 @@ class TagihanAdmin(admin.ModelAdmin):
         ('uses', admin.RelatedOnlyFieldListFilter),
         ('month', admin.RelatedOnlyFieldListFilter),
     ]
+
+@admin.register(PayMent)
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = [
+        'tagihan',
+        'date_pay',
+        'biaya_admin',
+        'sumPayment',
+    ]
+    ordering = ['id']
+    search_fields = ['custummer']

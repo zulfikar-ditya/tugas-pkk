@@ -6,19 +6,50 @@
 
 {% block content %}
 <div class="container my-5">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} m-2" id="msg" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %} 
     <div class="table-responsive table-hover">
         <table class="table text-capitalize">
             <thead class="bg-danger text-white">
                 <th scope="col">#</th>
-                <th scope="col">tagihan</th>
                 <th scope="col">custommer</th>
-                <th scope="col">month</th>
                 <th scope="col">date pay</th>
                 <th scope="col">biaya admin</th>
                 <th scope="col">sum payment</th>
             </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <th>#</th>
+                    <td>{{i.custommer}}</td>
+                    <td>{{i.date_pay}}</td>
+                    <td>{{i.biaya_admin}}</td>
+                    <td>{{i.sumPayment}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
+</div>
+<div class="container my-5">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination ">
+            {% if data.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{data.previous_page_number}}">Previous</a></li>
+            {% endif %}
+            <li class="page-item"><span class="page-link"> Page {{data.number}} of {{data.paginator.num_pages}}</span></li>
+            {% if data.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{data.next_page_number}}">Next &raquo;</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{data.paginator.num_pages}}">Last</a></li>
+            {% endif %}
+        </ul>
+    </nav>
 </div>
 {% endblock content %}
 
