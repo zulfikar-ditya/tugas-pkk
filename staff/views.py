@@ -5,10 +5,20 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 
-from my_app.views import dont_have_acces
-from my_app.models import User, Uses
+from my_app.views import dont_have_acces, notFound
+from my_app.models import User, Uses, Months
 
 from .forms import UsesForm
+
+'''
+@login_required
+def (request):
+    if request.user.is_staff or request.user.is_superuser:
+        return render(request, 'staff/.html')
+    else:
+        return dont_have_acces(request)
+'''
+
 
 @login_required
 def index(request):
@@ -66,6 +76,32 @@ def powerUsedList(request):
         data = Uses.objects.all()
         return render(request, 'staff/power-used/list.html', {
             'data': data,
+        })
+    else:
+        return dont_have_acces(request)
+
+
+@login_required
+def editPowerUsed(request, id):
+    if request.user.is_staff or request.user.is_superuser:
+        month = Months.objects.all()
+        try:
+            data = Uses.objects.get(pk=id)
+        except:
+            return notFound(request)
+        user = User.objects.get(username=data.custommer)
+        if request.method == "POST":
+            data.month = Months.objects.get(pk=request.POST['month'])
+            data.year = request.POST['year']
+            data.meter_start = request.POST['meter_start']
+            data.meter_end = request.POST['meter_end']
+            data.save()
+            messages.success(request, 'Data Updated')
+            return redirect('staff:powerUsedList')
+
+        return render(request, 'staff/power-used/edit.html', {
+            'data': data,
+            'month': month,
         })
     else:
         return dont_have_acces(request)

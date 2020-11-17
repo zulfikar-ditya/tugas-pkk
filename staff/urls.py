@@ -9,4 +9,5 @@ urlpatterns = [
     path('power-used/add/', views.add_uses_id, name='add_uses_id'),
     path('power-used/add/<str:username>/', views.addUses, name='addUses'),
     path('power-used/list/', views.powerUsedList, name='powerUsedList'),
+    path('power-used/edit/<int:id>/', views.editPowerUsed, name="editPowerUsed"),
 ]

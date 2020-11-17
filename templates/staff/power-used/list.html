@@ -27,7 +27,7 @@
                 {% for i in data %}
                 <tr>
                     <th scope="row">#</th>
-                    <td>{{ i.custommer }}</td>
+                    <td><a href="../edit/{{i.id}}/">{{ i.custommer }}</a></td>
                     <td>{{ i.month }}</td>
                     <td>{{ i.year }}</td>
                     <td>{{ i.meter_start }}</td>

@@ -26,3 +26,7 @@ def register(request):
 
 def dont_have_acces(request):
     return render(request, 'home/dont-have-access.html')
+
+
+def notFound(request):
+    return render(request, 'home/404.html')
