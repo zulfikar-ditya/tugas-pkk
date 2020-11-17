@@ -33,6 +33,15 @@
                             <span class="dropdown-item" href="" disable>Uses</span>
                             <a class="dropdown-item" href="{% url 'staff:add_uses_id' %}">Add Power used</a>
                             <a class="dropdown-item" href="{% url 'staff:powerUsedList' %}">List Power Used</a>
+
+                            <div class="dropdown-divider"></div>
+                            <span class="dropdown-item" href="" disable>Bill</span>
+                            <a class="dropdown-item" href="{% url 'staff:list_bill' %}">List Bill</a>
+
+                            <div class="dropdown-divider"></div>
+                            <span class="dropdown-item" href="" disable>Payment</span>
+                            <a class="dropdown-item" href="{% url 'staff:paymentlist' %}">List Payment</a>
+
                         </div>
                     </li>
                     {% endif %}

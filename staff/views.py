@@ -6,9 +6,11 @@ from django.urls import reverse
 
 
 from my_app.views import dont_have_acces, notFound
-from my_app.models import User, Uses, Months
+from my_app.models import User, Uses, Months, Tagihan, PayMent, Tarif
 
 from .forms import UsesForm
+
+import datetime
 
 '''
 @login_required
@@ -37,7 +39,7 @@ def add_uses_id(request):
                 user = User.objects.get(username=request.POST['user'])
                 return HttpResponseRedirect(f'../add/{user}/')
             except (KeyError, User.DoesNotExist):
-                messages.danger(request, 'custommer not found')
+                messages.error(request, 'custommer not found')
             
         return render(request, 'staff/power-used/add-uses-id.html')
     else:
@@ -50,7 +52,7 @@ def addUses(request, username):
         try:
             user = User.objects.get(username=username)
         except:
-            messages.danger(request, 'custemmer not found')
+            messages.error(request, 'custemmer not found')
             return redirect('staff:add_uses_id')
         if request.method == 'POST':
             form = UsesForm(request.POST)
@@ -105,3 +107,65 @@ def editPowerUsed(request, id):
         })
     else:
         return dont_have_acces(request)
+
+
+# Bill Pages
+@login_required
+def autoAddBill(request):
+    if request.user.is_staff or request.user.is_superuser:
+        uses = Uses.objects.all()
+        tagihan = Tagihan.objects.all()
+        for i in uses:
+            try:
+                tagihan_item = Tagihan.objects.get(uses=i.id)
+            except:
+                new = Tagihan()
+                new.custommer = i.custommer
+                new.uses = i
+                new.month = i.month
+                new.year = i.year
+                new.sum_meter = int(i.meter_end) - int(i.meter_start)
+                new.save()
+        tagihan = Tagihan.objects.filter(status=False)
+        return render(request, 'staff/bill/list.html', {'tagihan': tagihan})
+    else:
+        return dont_have_acces(request)
+
+
+# payment pages
+def paymentConfirm(request, id):
+    if request.user.is_staff or request.user.is_superuser:
+        try: 
+            tagihan = Tagihan.objects.get(pk=id, status=False)
+        except:
+            return notFound(request)
+        custommer = User.objects.get(username=tagihan.custommer)
+        tarif = Tarif.objects.get(pk=custommer.id)
+        new = PayMent()
+        new.tagihan = tagihan
+        new.custommer = custommer
+        new.month = tagihan.month
+        new.biaya_admin = 5000
+        new.sumPayment = (int(tagihan.sum_meter) * int(tarif.tarif)) + new.biaya_admin
+        if request.method == "POST":
+            tagihan.status = True
+            tagihan.save()
+            new.save()
+            return redirect('staff:paymentlist')
+        return render(request, 'staff/payment/confirm.html', {
+            'tagihan': tagihan,
+            'new': new,
+            'tarif': tarif
+        })
+    else:
+        return dont_have_acces(request)
+
+
+@login_required
+def paymentlist(request):
+    if request.user.is_staff or request.user.is_superuser:
+        data = PayMent.objects.all()
+        return render(request, 'staff/payment/list.html', {'data': data})
+    else:
+        return dont_have_acces(request)
+        

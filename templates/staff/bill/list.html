@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+| Staff - Bill - List
+{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="table-responsive table-hover text-capitalize">
+        <table class="table text-center">
+            <thead class="bg-danger text-white">
+                <th scope="col">#</th>
+                <th scope="col">custommer</th>
+                <th scope="col">uses</th>
+                <th scope="col">year</th>
+                <th scope="col">sum meter</th>
+                <th scope="col">Pay</th>
+            </thead>
+            <tbody>
+                {% for i in tagihan %}
+                <tr>
+                    <th scope="row">#</th>
+                    <td>{{i.custommer}}</td>
+                    <td>{{i.month}}</td>
+                    <td>{{i.year}}</td>
+                    <td>{{i.sum_meter}}</td>
+                    <td><a href="../../payment/confirm/{{i.id}}/" class="btn btn-sm btn-outline-info">Pay Now</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

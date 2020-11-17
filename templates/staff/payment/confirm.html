@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}
+| Staff - Payment - Confirm - {{tagihan.custommer}} - {{tagihan.id}}
+{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <h3>Power Used</h3>
+    <div class="table-reponsive table-hover">
+        <table class="table text-capitalize">
+            <thead class="bg-danger text-white">
+                <th scope="col">Field</th>
+                <th scope="col">Value</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>custommer</td>
+                    <td>{{tagihan.custommer}}</td>
+                </tr>
+                <tr>
+                    <td>month</td>
+                    <td>{{tagihan.month}}</td>
+                </tr>
+                <tr>
+                    <td>year</td>
+                    <td>{{tagihan.year}}</td>
+                </tr>
+                <tr>
+                    <td>sum meter</td>
+                    <td>{{tagihan.sum_meter}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container mt-5">
+    <h3>Payment Detail</h3>
+    <div class="table-responsive table-hover">
+        <table class="table text-capitalize">
+            <thead class="bg-danger text-white">
+                <th scope="col">Field</th>
+                <th scope="col">Value</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Admin Pay</td>
+                    <td>{{new.biaya_admin}}</td>
+                </tr>
+                <tr>
+                    <td>Rates/kwh</td>
+                    <td>{{tarif.tarif}}</td>
+                </tr>
+                <tr>
+                    <td>Sum</td>
+                    <td>{{new.sumPayment}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5 border border-danger p-4">
+                <h3 class="text-center">Pay Now</h3>
+                <hr class="border-danger">
+                <form action="" method="post" class="row justify-content-center">
+                    {% csrf_token %}
+                    <input type="submit" value="Confirm" class="btn btn-outline-info">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+

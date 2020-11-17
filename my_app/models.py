@@ -57,7 +57,7 @@ class Tagihan(models.Model):
     month = models.ForeignKey(Months, on_delete=models.CASCADE)
     year = models.IntegerField()
     sum_meter = models.IntegerField()
-    status = models.BooleanField(default=True)
+    status = models.BooleanField(default=False)
     
 
     class Meta:
