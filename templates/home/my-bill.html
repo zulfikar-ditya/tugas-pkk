@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-| Staff - Bill - List
+| My Bill
 {% endblock title %}
 
 {% block content %}
@@ -10,17 +10,19 @@
         <table class="table text-center">
             <thead class="bg-danger text-white">
                 <th scope="col">#</th>
+                <th scope="col">custommer</th>
+                <th scope="col">uses</th>
                 <th scope="col">year</th>
                 <th scope="col">sum meter</th>
-                <th scope="col">Pay</th>
             </thead>
             <tbody>
-                {% for i in tagihan %}
+                {% for i in data %}
                 <tr>
                     <th scope="row">#</th>
+                    <td>{{i.custommer}}</td>
+                    <td>{{i.month}}</td>
                     <td>{{i.year}}</td>
                     <td>{{i.sum_meter}}</td>
-                    <td><a href="../../payment/confirm/{{i.id}}/" class="btn btn-sm btn-outline-info">Pay Now</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -30,16 +32,17 @@
 <div class="container my-5">
     <nav aria-label="Page navigation example">
         <ul class="pagination ">
-            {% if tagihan.has_previous %}
+            {% if data.has_previous %}
             <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{tagihan.previous_page_number}}">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{data.previous_page_number}}">Previous</a></li>
             {% endif %}
-            <li class="page-item"><span class="page-link"> Page {{tagihan.number}} of {{tagihan.paginator.num_pages}}</span></li>
-            {% if tagihan.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{tagihan.next_page_number}}">Next &raquo;</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{tagihan.paginator.num_pages}}">Last</a></li>
+            <li class="page-item"><span class="page-link"> Page {{data.number}} of {{data.paginator.num_pages}}</span></li>
+            {% if data.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{data.next_page_number}}">Next &raquo;</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{data.paginator.num_pages}}">Last</a></li>
             {% endif %}
         </ul>
     </nav>
 </div>
 {% endblock content %}
+

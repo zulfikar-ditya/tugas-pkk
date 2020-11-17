@@ -46,6 +46,9 @@
                     </li>
                     {% endif %}
                     <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'home:myBill' %}">My Bill</a>
+                    </li>
+                    <li class="nav-item active">
                         <a class="nav-link" href="{% url 'logout' %}">Logout <i class="fas fa-sign-out-alt"></i></a>
                     </li>
                     {% else %}
